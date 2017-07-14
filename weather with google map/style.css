@@ -1,0 +1,59 @@
+.navigate{
+   text-align: center;
+}
+h3{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    padding-top: 10px;
+   
+}
+.head{
+    text-align: center;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 5px;
+}
+.weather{
+   width: auto;
+   height: 400px;
+   text-align: center;
+   float: right;
+   margin: 25px 75px 25px 25px;
+  
+}
+.mn,.dmn{
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px;
+}
+.description{
+    clear: both;
+}
+span{
+    display: block;
+    font-size: 17px;
+    text-align: center;
+}
+.pictureAndTemp{
+    text-align: center;
+}
+.cont{
+    margin: 5px;
+    display: inline-flex;
+}
+p{
+    margin-top: 5px;
+    margin-bottom: 1px;
+}
+.mnx{
+     clear: both;
+}
+.maint{
+    padding: 5px;
+}
+#map {
+    height: 500px;
+    width: 700px;
+    margin: 25px;
+    float: left;
+}

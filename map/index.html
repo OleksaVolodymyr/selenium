@@ -3,18 +3,16 @@
 <head>
     <meta charset="utf-8">
     <title>
-        Weather
+        Map
     </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="style.css">
     </head>
 <body>
-    <div><p class="head">Enter City:</p></div>
-    <div class ="navigate">
-    <input type="text" name ="location" id="loc">
-    <input type="button" name="searchbtn" id="btn" value="Search">
-    </div>
+     <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
 </body>
 <script src="script.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdYNaGl_NJ-yZO52QWcDhfrlTKiyQ78vc&callback=initMap"></script>
 </html>
