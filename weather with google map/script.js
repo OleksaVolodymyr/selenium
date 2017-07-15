@@ -18,7 +18,6 @@ $('#btn').click(function(){
 });
 function setData(result){
     var parse = JSON.parse(result);
-    //console.log(parse);
     $(".weather").remove();
     $('body').append("<div class='weather'></div>");
     $('.weather').append("<h3>"+parse.name+", "+ parse.sys.country+"</h3>")
@@ -34,50 +33,43 @@ function setData(result){
         .append("<div class='dmn'>"+"wind deg"+"<span>"+parse.wind.deg+"</span>"+"</div>")
         .append("<div class='dmn'>"+"humidity"+"<span>"+parse.main.humidity+"%"+"</span>"+"</div>")
         .append("<div class='dmn'>"+"pressure"+"<span>"+parse.main.pressure+"hPa"+"</span>"+"</div>")
-        .append("<div class='dmn'>"+"cloudiness"+"<span>"+parse.clouds.all+"%"+"</span>"+"</div>");;
+        .append("<div class='dmn'>"+"cloudiness"+"<span>"+parse.clouds.all+"%"+"</span>"+"</div>");
     $('.weather').append("<div class='sunud'></div>");
     var sunrise = new Date(parse.sys.sunrise);
     var sunset = new Date(parse.sys.sunset);
-    $('.sunud').append("<div class='dmn'>"+"sunrice"+"<span>"+sunrise.getHours()+":"+sunrise.getMinutes()+":"+sunrise.getSeconds()+"</span>"+"</div>")
+    $('.sunud').append("<div class='dmn'>"+"sunrise"+"<span>"+sunrise.getHours()+":"+sunrise.getMinutes()+":"+sunrise.getSeconds()+"</span>"+"</div>")
         .append("<div class='dmn'>"+"sunset"+"<span>"+sunset.getHours()+":"+sunset.getMinutes()+":"+sunset.getSeconds()+"</span>"+"</div>");
-    var pos={lat: parse.coord.lat, lng: parse.coord.lon};
-    var map =new google.maps.Map(document.getElementById('map'), {
-        zoom:4,
+    var pos = {lat: parse.coord.lat, lng: parse.coord.lon};
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 6,
         center: pos
     });
     var  marker = new google.maps.Marker({position: pos , map: map});  
 }
-
-var map;
-var  marker;
 function initMap() {
-        var uluru = {lat: 49.84, lng: 24.02};
-         map = new google.maps.Map(document.getElementById('map'), {
+    var marker;
+    var uluru = {lat: 49.84, lng: 24.02};
+       var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4,
           center: uluru
         });
-    /*google.maps.event.addListener(map, 'click', function(event) {
-    var  marker = new google.maps.Marker({position: event.latLng, map: map});
-    console.log(event.latLng);
-    var result= $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat="+event.latLng.lat()+"&lon="+event.latLng.lng()+"&appid=8cc5110a45a6d7e4cdcf0b687e8def4f");
-    result.success(function(){
-          setData(result.responseText);
-      });
-      result.fail(function(){
-        alert(JSON.parse(result.responseText).message);
-      });
-  });*/
-}
-$('#map').click(function(e){
-    google.maps.event.addListener(map, 'click', function(event) {
-    marker = new google.maps.Marker({position: event.latLng, map: map});
-    var result= $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat="+event.latLng.lat()+"&lon="+event.latLng.lng()+"&units=metric&appid=8cc5110a45a6d7e4cdcf0b687e8def4f");
-    result.success(function(){
-          setData(result.responseText);
-      });
-      result.fail(function(){
-        alert(JSON.parse(result.responseText).message);
-      });
+    google.maps.event.addListener(map, 'rightclick', function(event) {
+        if(marker){
+            marker.setMap(null);
+        }
+        marker = new google.maps.Marker({position: event.latLng, map: map});
+        getWeather(event.latLng);
+      
   });
-});
+ 
+}
+function getWeather(event){
+    var result= $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat="+event.lat()+"&lon="+event.lng()+"&units=metric"+"&appid=8cc5110a45a6d7e4cdcf0b687e8def4f");
+    result.success(function(){
+          setData(result.responseText);
+      });
+    result.fail(function(){
+        alert(JSON.parse(result.responseText).message);
+      });
+}
 

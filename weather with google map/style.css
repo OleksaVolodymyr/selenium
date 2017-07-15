@@ -5,7 +5,6 @@ h3{
     margin-top: 15px;
     margin-bottom: 5px;
     padding-top: 10px;
-   
 }
 .head{
     text-align: center;
@@ -17,8 +16,8 @@ h3{
    width: auto;
    height: 400px;
    text-align: center;
-   float: right;
-   margin: 25px 75px 25px 25px;
+   float: left;
+   margin: 25px 25px 25px 100px;
   
 }
 .mn,.dmn{
