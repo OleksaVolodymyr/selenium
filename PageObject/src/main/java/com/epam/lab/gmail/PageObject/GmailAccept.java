@@ -6,8 +6,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class GmailAccept {
-	@FindBy(xpath = "//a[@class='gb_b gb_db gb_R']")
+	@FindBy(xpath = "//div[@class='gb_wb']")
 	private WebElement userInfo;
+	
+	@FindBy(xpath = "//span[@class='gb_8a gbii']")
+	private WebElement picture;
 	
 	@FindBy(xpath = "//span[@class='bofITb']")
 	private WebElement undoDelete;
@@ -17,7 +20,8 @@ public class GmailAccept {
 	}
 	
 	public String acceptLogin(){
-		return userInfo.getAttribute("title");
+		picture.click();
+		return userInfo.getText();
 	}
 	
 	public boolean acceptUndoDelete(){
