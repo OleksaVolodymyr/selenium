@@ -39,29 +39,27 @@ function setData(result){
     var sunset = new Date(parse.sys.sunset);
     $('.sunud').append("<div class='dmn'>"+"sunrise"+"<span>"+sunrise.getHours()+":"+sunrise.getMinutes()+":"+sunrise.getSeconds()+"</span>"+"</div>")
         .append("<div class='dmn'>"+"sunset"+"<span>"+sunset.getHours()+":"+sunset.getMinutes()+":"+sunset.getSeconds()+"</span>"+"</div>");
-    var pos = {lat: parse.coord.lat, lng: parse.coord.lon};
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 6,
-        center: pos
-    });
-    var  marker = new google.maps.Marker({position: pos , map: map});  
 }
+var map;
+var marker;
 function initMap() {
-    var marker;
     var uluru = {lat: 49.84, lng: 24.02};
-       var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4,
           center: uluru
         });
     google.maps.event.addListener(map, 'rightclick', function(event) {
-        if(marker){
-            marker.setMap(null);
-        }
-        marker = new google.maps.Marker({position: event.latLng, map: map});
+        setMarker(event.latLng,map);
         getWeather(event.latLng);
       
   });
  
+}
+function setMarker(pos, map){
+ if(marker){
+    marker.setMap(null);
+        }
+ marker = new google.maps.Marker({position: pos, map: map});
 }
 function getWeather(event){
     var result= $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat="+event.lat()+"&lon="+event.lng()+"&units=metric"+"&appid=8cc5110a45a6d7e4cdcf0b687e8def4f");
